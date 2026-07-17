@@ -1,0 +1,40 @@
+{
+  "title": "CPU Usage",
+  "uid": "cpu-usage",
+  "timezone": "browser",
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "5s",
+  "time": { "from": "now-15m", "to": "now" },
+  "templating": {
+    "list": [
+      {
+        "name": "container",
+        "type": "query",
+        "datasource": { "type": "prometheus", "uid": "prometheus" },
+        "query": "label_values(cgroup_cpu_usage_seconds_total, container_name)",
+        "refresh": 2,
+        "includeAll": true,
+        "multi": true,
+        "current": { "text": "All", "value": "$__all" }
+      }
+    ]
+  },
+  "panels": [
+    {
+      "id": 1,
+      "title": "$container",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
+      "repeat": "container",
+      "repeatDirection": "h",
+      "fieldConfig": { "defaults": { "unit": "percentunit" }, "overrides": [] },
+      "targets": [
+        {
+          "expr": "rate(cgroup_cpu_usage_seconds_total{container_name=\"$container\"}[1m])",
+          "legendFormat": "{{container_name}}"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "title": "Network Usage",
+  "uid": "network-usage",
+  "timezone": "browser",
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "5s",
+  "time": { "from": "now-15m", "to": "now" },
+  "templating": {
+    "list": [
+      {
+        "name": "container",
+        "type": "query",
+        "datasource": { "type": "prometheus", "uid": "prometheus" },
+        "query": "label_values(cgroup_network_receive_bytes_total, container_name)",
+        "refresh": 2,
+        "includeAll": true,
+        "multi": true,
+        "current": { "text": "All", "value": "$__all" }
+      }
+    ]
+  },
+  "panels": [
+    {
+      "id": 1,
+      "title": "$container",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
+      "repeat": "container",
+      "repeatDirection": "h",
+      "fieldConfig": { "defaults": { "unit": "Bps" }, "overrides": [] },
+      "targets": [
+        {
+          "expr": "rate(cgroup_network_receive_bytes_total{container_name=\"$container\"}[1m])",
+          "legendFormat": "rx"
+        },
+        {
+          "expr": "rate(cgroup_network_transmit_bytes_total{container_name=\"$container\"}[1m])",
+          "legendFormat": "tx"
+        }
+      ]
+    }
+  ]
+}
