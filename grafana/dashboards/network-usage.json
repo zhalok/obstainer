@@ -25,9 +25,9 @@
       "id": 1,
       "title": "$container",
       "type": "timeseries",
-      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
+      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 0 },
       "repeat": "container",
-      "repeatDirection": "h",
+      "repeatDirection": "v",
       "fieldConfig": { "defaults": { "unit": "Bps" }, "overrides": [] },
       "targets": [
         {
