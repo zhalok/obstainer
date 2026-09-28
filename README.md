@@ -4,6 +4,12 @@ A self-contained container observability stack: a custom exporter reads per-cont
 resource usage straight from the Linux cgroup v2 filesystem, Prometheus stores it,
 Loki/Promtail collect logs, and Grafana visualizes everything in per-container dashboards.
 
+## Demo
+
+[![Obstainer demo](https://img.youtube.com/vi/sifxPdFs2AE/maxresdefault.jpg)](https://youtu.be/sifxPdFs2AE)
+
+Watch the demo on YouTube: <https://youtu.be/sifxPdFs2AE>
+
 ## Stack overview
 
 | Service           | Role                                                              | Port |
